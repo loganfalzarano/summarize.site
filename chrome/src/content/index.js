@@ -257,13 +257,20 @@ async function run() {
   const port = chrome.runtime.connect();
   port.onMessage.addListener(function (msg) {
     if (msg.answer) {
-      innerContainer.innerHTML = '<p><span class="prefix">Summarized </span> by <a href="https://chat.openai.com/chat" target="_blank">ChatGPT</a><button id="copy-button"> Copy</button>:<pre id="copy-text"></pre></p>';
+      innerContainer.innerHTML = '<p><span class="prefix">Summarized </span> by <a href="https://chat.openai.com/chat" target="_blank">ChatGPT</a><button id="nav-button"> Navigate</button><button id="copy-button"> Copy</button>:<pre id="copy-text"></pre></p>';
       innerContainer.querySelector("pre").textContent = msg.answer;
 
       const copyButton = document.querySelector("#copy-button");
       copyButton.addEventListener("click", function() {
         var preElement = document.querySelector("#copy-text");
         copyTextToClipboard(preElement.textContent);
+      });
+
+      const navButton = document.querySelector("#nav-button");
+      navButton.addEventListener("click", function() {
+        var preElement = document.querySelector("#copy-text");
+        copyTextToClipboard(preElement.textContent);
+        window.location.href = "https://cs226fa21.github.io/";
       });
 
       innerContainer.scrollTop = innerContainer.scrollHeight;
