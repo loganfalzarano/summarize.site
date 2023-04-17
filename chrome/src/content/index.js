@@ -263,14 +263,20 @@ async function run() {
       const copyButton = document.querySelector("#copy-button");
       copyButton.addEventListener("click", function() {
         var preElement = document.querySelector("#copy-text");
+        //const content = getContentOfArticle();
+        console.log(content);
         copyTextToClipboard(preElement.textContent);
       });
 
       const navButton = document.querySelector("#nav-button");
       navButton.addEventListener("click", function() {
-        var preElement = document.querySelector("#copy-text");
-        copyTextToClipboard(preElement.textContent);
-        window.location.href = "https://cs226fa21.github.io/";
+        //var preElement = document.querySelector("#copy-text");
+        //console.log(content);
+        //copyTextToClipboard(content);
+        navigator.clipboard.writeText(content).then(function() {
+          window.location.href = "https://cs226fa21.github.io/";
+        });
+        //window.location.href = "https://cs226fa21.github.io/";
       });
 
       innerContainer.scrollTop = innerContainer.scrollHeight;
